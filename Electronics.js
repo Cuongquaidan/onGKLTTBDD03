@@ -12,6 +12,7 @@ import React, { useState } from "react";
 const Electronics = ({ navigation }) => {
     const [category, setCategory] = useState("Smart phone");
     const [dongSP, setDongSP] = useState("isBestSales");
+    const [isSeeAll, setIsSeeAll] = useState(false);
     const data = [
         {
             image: require("./assets/1.png"),
@@ -49,6 +50,87 @@ const Electronics = ({ navigation }) => {
             isBestMatched: true,
             isPopular: false,
         },
+        {
+            image: require("./assets/1.png"),
+            name: "Smart phone",
+            price: 999,
+            type: "Smart phone",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/2.png"),
+            name: "Smart phone",
+            price: 899,
+            type: "Ipad",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/3.png"),
+            name: "Smart phone",
+            price: 999,
+            type: "Smart phone",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/4.png"),
+            name: "Smart phone",
+            price: 799,
+            type: "Macbook",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/4.png"),
+            name: "Smart phone",
+            price: 799,
+            type: "Macbook",
+            isBestSales: false,
+            isBestMatched: true,
+            isPopular: false,
+        },
+        {
+            image: require("./assets/1.png"),
+            name: "Smart phone",
+            price: 999,
+            type: "Smart phone",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/2.png"),
+            name: "Smart phone",
+            price: 899,
+            type: "Ipad",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/3.png"),
+            name: "Smart phone",
+            price: 999,
+            type: "Smart phone",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
+        {
+            image: require("./assets/4.png"),
+            name: "Smart phone",
+            price: 799,
+            type: "Macbook",
+            isBestSales: true,
+            isBestMatched: true,
+            isPopular: true,
+        },
     ];
     const dataFilter = data.filter((item) => {
         if (dongSP === "isBestSales") {
@@ -59,6 +141,8 @@ const Electronics = ({ navigation }) => {
             return item.type === category && item.isPopular === true;
         }
     });
+
+    const dataFilter2 = isSeeAll ? dataFilter : dataFilter.slice(0, 4);
 
     return (
         <SafeAreaView style={{ padding: 20, alignItems: "center" }}>
@@ -140,7 +224,7 @@ const Electronics = ({ navigation }) => {
                     <Text style={{ fontWeight: 700, fontSize: 20 }}>
                         Categories
                     </Text>
-                    <Pressable>
+                    <Pressable onPress={() => setIsSeeAll((prev) => !prev)}>
                         <Text style={{ fontSize: 16 }}>See all</Text>
                     </Pressable>
                 </View>
@@ -246,7 +330,7 @@ const Electronics = ({ navigation }) => {
                 </View>
 
                 <View style={{ width: "100%", height: 350 }}>
-                    {dataFilter.map((item) => (
+                    {dataFilter2.map((item) => (
                         <View
                             style={{
                                 flexDirection: "row",
@@ -279,6 +363,7 @@ const Electronics = ({ navigation }) => {
                                 borderRadius: 5,
                                 width: "100%",
                             }}
+                            onPress={() => setIsSeeAll((prev) => !prev)}
                         >
                             <Text
                                 style={{ color: "white", textAlign: "center" }}
