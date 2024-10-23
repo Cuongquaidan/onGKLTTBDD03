@@ -1,7 +1,44 @@
 import { View, Text, Image, TextInput, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const accounts = [
+        {
+            email: "mot@gmail.com",
+            password: "mot",
+        },
+        {
+            email: "hai@gmail.com",
+            password: "hai",
+        },
+        {
+            email: "ba@gmail.com",
+            password: "ba",
+        },
+        {
+            email: "bon@gmail.com",
+            password: "bon",
+        },
+        {
+            email: "nam@gmail.com",
+            password: "nam",
+        },
+    ];
+    const handleLogin = () => {
+        console.log("Login.........");
+        if (
+            accounts.some((item) => {
+                return item.email === email && item.password === password;
+            })
+        ) {
+            navigation.navigate("Electronics");
+            console.log("Dang nhap thang cong");
+        } else {
+            console.log("Dang nhap that bai");
+        }
+    };
     return (
         <View style={{ alignItems: "center", padding: 30 }}>
             <Image
@@ -40,6 +77,8 @@ const Login = () => {
                         paddingHorizontal: 40,
                         color: "gray",
                     }}
+                    onChangeText={(value) => setEmail(value)}
+                    value={email}
                 ></TextInput>
             </View>
             <View
@@ -69,6 +108,8 @@ const Login = () => {
                         paddingHorizontal: 40,
                         color: "gray",
                     }}
+                    onChangeText={(value) => setPassword(value)}
+                    value={password}
                 ></TextInput>
                 <Image
                     source={require("./assets/eye.png")}
@@ -99,6 +140,7 @@ const Login = () => {
                     borderRadius: 10,
                     width: 300,
                 }}
+                onPress={() => handleLogin()}
             >
                 <Text style={{ textAlign: "center", color: "white" }}>
                     Continue
