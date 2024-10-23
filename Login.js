@@ -85,7 +85,7 @@ const Login = () => {
                     width: "100%",
                     textAlign: "right",
                     marginTop: 10,
-                    color: "skyblue",
+                    color: "blue",
                     fontWeight: "bold",
                 }}
             >
@@ -94,7 +94,7 @@ const Login = () => {
             <Pressable
                 style={{
                     marginTop: 40,
-                    backgroundColor: "skyblue",
+                    backgroundColor: "blue",
                     padding: 8,
                     borderRadius: 10,
                     width: 300,
@@ -104,6 +104,40 @@ const Login = () => {
                     Continue
                 </Text>
             </Pressable>
+
+            <View style={{ flexDirection: "row", marginTop: 40 }}>
+                <View
+                    style={{
+                        flex: 1,
+                        borderBottomWidth: 1,
+                        borderColor: "gray",
+                        width: 140,
+                    }}
+                ></View>
+                <Text>or</Text>
+                <View
+                    style={{
+                        flex: 1,
+                        borderBottomWidth: 1,
+                        borderColor: "gray",
+                        width: 140,
+                    }}
+                ></View>
+            </View>
+            <View style={{ flexDirection: "row", marginTop: 20, gap: 10 }}>
+                <Image
+                    source={require("./assets/google.png")}
+                    style={{ marginTop: 50 }}
+                ></Image>
+                <Image
+                    source={require("./assets/face.png")}
+                    style={{ marginTop: 50 }}
+                ></Image>
+                <Image
+                    source={require("./assets/apple.png")}
+                    style={{ marginTop: 50 }}
+                ></Image>
+            </View>
         </View>
     );
 };
