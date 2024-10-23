@@ -237,14 +237,19 @@ const Electronics = ({ navigation }) => {
                     }}
                 >
                     <Pressable
-                        style={{
-                            width: "33%",
-                            backgroundColor: "blue",
-                            height: 100,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                backgroundColor: "blue",
+                                height: 100,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            category === "Smart phone"
+                                ? { borderWidth: 3 }
+                                : {},
+                        ]}
                         onPress={() => setCategory("Smart phone")}
                     >
                         <Image
@@ -253,14 +258,17 @@ const Electronics = ({ navigation }) => {
                         ></Image>
                     </Pressable>
                     <Pressable
-                        style={{
-                            width: "33%",
-                            backgroundColor: "red",
-                            height: 100,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                backgroundColor: "red",
+                                height: 100,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            category === "Ipad" ? { borderWidth: 3 } : {},
+                        ]}
                         onPress={() => setCategory("Ipad")}
                     >
                         <Image
@@ -269,14 +277,17 @@ const Electronics = ({ navigation }) => {
                         ></Image>
                     </Pressable>
                     <Pressable
-                        style={{
-                            width: "33%",
-                            backgroundColor: "yellow",
-                            height: 100,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                backgroundColor: "yellow",
+                                height: 100,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            category === "Macbook" ? { borderWidth: 3 } : {},
+                        ]}
                         onPress={() => setCategory("Macbook")}
                     >
                         <Image
@@ -295,34 +306,64 @@ const Electronics = ({ navigation }) => {
                     }}
                 >
                     <Pressable
-                        style={{
-                            width: "33%",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            dongSP === "isBestSales"
+                                ? {
+                                      borderWidth: 1,
+                                      borderRadius: 5,
+                                      paddingVertical: 3,
+                                      borderColor: "blue",
+                                  }
+                                : {},
+                        ]}
                         onPress={() => setDongSP("isBestSales")}
                     >
                         <Text style={{ color: "blue" }}>Best sales</Text>
                     </Pressable>
                     <Pressable
-                        style={{
-                            width: "33%",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            dongSP === "isBestMatched"
+                                ? {
+                                      borderWidth: 1,
+                                      borderRadius: 5,
+                                      paddingVertical: 3,
+                                      borderColor: "blue",
+                                  }
+                                : {},
+                        ]}
                         onPress={() => setDongSP("isBestMatched")}
                     >
                         <Text style={{ color: "blue" }}>Best matched</Text>
                     </Pressable>
                     <Pressable
-                        style={{
-                            width: "33%",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 5,
-                        }}
+                        style={[
+                            {
+                                width: "33%",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: 5,
+                            },
+                            dongSP === "isPopular"
+                                ? {
+                                      borderWidth: 1,
+                                      borderRadius: 5,
+                                      paddingVertical: 3,
+                                      borderColor: "blue",
+                                  }
+                                : {},
+                        ]}
                         onPress={() => setDongSP("isPopular")}
                     >
                         <Text style={{ color: "blue" }}>Popular</Text>
