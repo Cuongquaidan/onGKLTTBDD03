@@ -8,11 +8,12 @@ import {
     TextInput,
 } from "react-native";
 import React, { useState } from "react";
-
+import { useAuth } from "./context/AuthContext";
 const Electronics = ({ navigation }) => {
     const [category, setCategory] = useState("Smart phone");
     const [dongSP, setDongSP] = useState("isBestSales");
     const [isSeeAll, setIsSeeAll] = useState(false);
+    const { emailAuth, passwordAuth } = useAuth();
     const data = [
         {
             image: require("./assets/1.png"),
@@ -166,7 +167,7 @@ const Electronics = ({ navigation }) => {
                             alignItems: "center",
                         }}
                     >
-                        <Pressable>
+                        <Pressable onPress={() => navigation.navigate("Login")}>
                             <Text style={{ fontWeight: 700 }}>{"<"}</Text>
                         </Pressable>
                         <Text style={{ fontWeight: 700, fontSize: 20 }}>
@@ -178,6 +179,9 @@ const Electronics = ({ navigation }) => {
                             source={require("./assets/codicon_account.png")}
                             style={{}}
                         ></Image>
+                        <Text style={{ fontWeight: 700, fontSize: 20 }}>
+                            {emailAuth}
+                        </Text>
                     </View>
                 </View>
                 <View>

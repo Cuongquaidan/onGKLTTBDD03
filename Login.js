@@ -1,9 +1,10 @@
 import { View, Text, Image, TextInput, Pressable } from "react-native";
 import React, { useState } from "react";
-
+import { useAuth } from "./context/AuthContext";
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { setEmailAuth, setPasswordAuth } = useAuth();
     const accounts = [
         {
             email: "mot@gmail.com",
@@ -33,6 +34,8 @@ const Login = ({ navigation }) => {
                 return item.email === email && item.password === password;
             })
         ) {
+            setPasswordAuth(password);
+            setEmailAuth(email);
             navigation.navigate("Electronics");
             console.log("Dang nhap thang cong");
         } else {
