@@ -1,34 +1,35 @@
 import { View, Text, Image, TextInput, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useAuth } from "./context/AuthContext";
+
+const accounts = [
+    {
+        email: "mot@gmail.com",
+        password: "mot",
+    },
+    {
+        email: "hai@gmail.com",
+        password: "hai",
+    },
+    {
+        email: "ba@gmail.com",
+        password: "ba",
+    },
+    {
+        email: "bon@gmail.com",
+        password: "bon",
+    },
+    {
+        email: "nam@gmail.com",
+        password: "nam",
+    },
+];
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setEmailAuth, setPasswordAuth } = useAuth();
-    const accounts = [
-        {
-            email: "mot@gmail.com",
-            password: "mot",
-        },
-        {
-            email: "hai@gmail.com",
-            password: "hai",
-        },
-        {
-            email: "ba@gmail.com",
-            password: "ba",
-        },
-        {
-            email: "bon@gmail.com",
-            password: "bon",
-        },
-        {
-            email: "nam@gmail.com",
-            password: "nam",
-        },
-    ];
-    const handleLogin = () => {
-        console.log("Login.........");
+
+    const handleLogin = useCallback(() => {
         if (
             accounts.some((item) => {
                 return item.email === email && item.password === password;
@@ -41,7 +42,7 @@ const Login = ({ navigation }) => {
         } else {
             console.log("Dang nhap that bai");
         }
-    };
+    }, [email, navigation, password, setEmailAuth, setPasswordAuth]);
     return (
         <View style={{ alignItems: "center", padding: 30 }}>
             <Image
