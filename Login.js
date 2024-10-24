@@ -1,5 +1,5 @@
 import { View, Text, Image, TextInput, Pressable } from "react-native";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useReducer } from "react";
 import { useAuth } from "./context/AuthContext";
 
 const accounts = [
@@ -24,25 +24,53 @@ const accounts = [
         password: "nam",
     },
 ];
-const Login = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { setEmailAuth, setPasswordAuth } = useAuth();
 
+const initialState = {
+    email: "",
+    password: "",
+};
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SET_EMAIL": {
+            return { ...state, email: action.payload };
+        }
+        case "SET_PASSWORD": {
+            return { ...state, password: action.payload };
+        }
+        default:
+            return state;
+    }
+};
+const Login = ({ navigation }) => {
+    // const [email,setEmail]= useState("")
+    // const [password,setPassword]= useState("")
+    const { setEmailAuth, setPasswordAuth } = useAuth();
+    const [state, dispatch] = useReducer(reducer, initialState);
     const handleLogin = useCallback(() => {
+        console.log(state?.password);
         if (
             accounts.some((item) => {
-                return item.email === email && item.password === password;
+                return (
+                    item.email === state?.email &&
+                    item.password === state?.password
+                );
             })
         ) {
-            setPasswordAuth(password);
-            setEmailAuth(email);
+            setPasswordAuth(state.password);
+            setEmailAuth(state.email);
+
             navigation.navigate("Electronics");
             console.log("Dang nhap thang cong");
         } else {
             console.log("Dang nhap that bai");
         }
-    }, [email, navigation, password, setEmailAuth, setPasswordAuth]);
+    }, [
+        navigation,
+        setEmailAuth,
+        setPasswordAuth,
+        state?.email,
+        state?.password,
+    ]);
     return (
         <View style={{ alignItems: "center", padding: 30 }}>
             <Image
@@ -81,8 +109,10 @@ const Login = ({ navigation }) => {
                         paddingHorizontal: 40,
                         color: "gray",
                     }}
-                    onChangeText={(value) => setEmail(value)}
-                    value={email}
+                    onChangeText={(value) =>
+                        dispatch({ type: "SET_EMAIL", payload: value })
+                    }
+                    value={state?.email}
                 ></TextInput>
             </View>
             <View
@@ -112,8 +142,10 @@ const Login = ({ navigation }) => {
                         paddingHorizontal: 40,
                         color: "gray",
                     }}
-                    onChangeText={(value) => setPassword(value)}
-                    value={password}
+                    onChangeText={(value) =>
+                        dispatch({ type: "SET_PASSWORD", payload: value })
+                    }
+                    value={state?.password}
                 ></TextInput>
                 <Image
                     source={require("./assets/eye.png")}
