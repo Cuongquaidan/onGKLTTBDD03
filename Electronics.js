@@ -7,141 +7,144 @@ import {
     Pressable,
     TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useReducer, useMemo, useCallback } from "react";
 import { useAuth } from "./context/AuthContext";
+const data = [
+    {
+        image: require("./assets/1.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/2.png"),
+        name: "Smart phone",
+        price: 899,
+        type: "Ipad",
+        isBestSales: false,
+        isBestMatched: false,
+        isPopular: false,
+    },
+    {
+        image: require("./assets/3.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/4.png"),
+        name: "Smart phone",
+        price: 799,
+        type: "Macbook",
+        isBestSales: false,
+        isBestMatched: true,
+        isPopular: false,
+    },
+    {
+        image: require("./assets/1.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/2.png"),
+        name: "Smart phone",
+        price: 899,
+        type: "Ipad",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/3.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/4.png"),
+        name: "Smart phone",
+        price: 799,
+        type: "Macbook",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/4.png"),
+        name: "Smart phone",
+        price: 799,
+        type: "Macbook",
+        isBestSales: false,
+        isBestMatched: true,
+        isPopular: false,
+    },
+    {
+        image: require("./assets/1.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/2.png"),
+        name: "Smart phone",
+        price: 899,
+        type: "Ipad",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/3.png"),
+        name: "Smart phone",
+        price: 999,
+        type: "Smart phone",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+    {
+        image: require("./assets/4.png"),
+        name: "Smart phone",
+        price: 799,
+        type: "Macbook",
+        isBestSales: true,
+        isBestMatched: true,
+        isPopular: true,
+    },
+];
 const Electronics = ({ navigation }) => {
     const [category, setCategory] = useState("Smart phone");
     const [dongSP, setDongSP] = useState("isBestSales");
     const [isSeeAll, setIsSeeAll] = useState(false);
     const { emailAuth, passwordAuth } = useAuth();
-    const data = [
-        {
-            image: require("./assets/1.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/2.png"),
-            name: "Smart phone",
-            price: 899,
-            type: "Ipad",
-            isBestSales: false,
-            isBestMatched: false,
-            isPopular: false,
-        },
-        {
-            image: require("./assets/3.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/4.png"),
-            name: "Smart phone",
-            price: 799,
-            type: "Macbook",
-            isBestSales: false,
-            isBestMatched: true,
-            isPopular: false,
-        },
-        {
-            image: require("./assets/1.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/2.png"),
-            name: "Smart phone",
-            price: 899,
-            type: "Ipad",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/3.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/4.png"),
-            name: "Smart phone",
-            price: 799,
-            type: "Macbook",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/4.png"),
-            name: "Smart phone",
-            price: 799,
-            type: "Macbook",
-            isBestSales: false,
-            isBestMatched: true,
-            isPopular: false,
-        },
-        {
-            image: require("./assets/1.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/2.png"),
-            name: "Smart phone",
-            price: 899,
-            type: "Ipad",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/3.png"),
-            name: "Smart phone",
-            price: 999,
-            type: "Smart phone",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-        {
-            image: require("./assets/4.png"),
-            name: "Smart phone",
-            price: 799,
-            type: "Macbook",
-            isBestSales: true,
-            isBestMatched: true,
-            isPopular: true,
-        },
-    ];
-    const dataFilter = data.filter((item) => {
-        if (dongSP === "isBestSales") {
-            return item.type === category && item.isBestSales === true;
-        } else if (dongSP === "isBestMatched") {
-            return item.type === category && item.isBestMatched === true;
-        } else {
-            return item.type === category && item.isPopular === true;
-        }
-    });
+
+    const dataFilter = useMemo(() => {
+        return data.filter((item) => {
+            if (dongSP === "isBestSales") {
+                return item.type === category && item.isBestSales === true;
+            } else if (dongSP === "isBestMatched") {
+                return item.type === category && item.isBestMatched === true;
+            } else {
+                return item.type === category && item.isPopular === true;
+            }
+        });
+    }, [category, dongSP]);
 
     const dataFilter2 = isSeeAll ? dataFilter : dataFilter.slice(0, 4);
 
